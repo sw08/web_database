@@ -7,7 +7,7 @@ class DB {
         this.acDB = undefined;
     }
     init(file, table) {
-        this[file] = new sqlite3.Database(`db/${file}.db`);
+        this[file] = new sql.Database(`db/${file}.db`);
         this[file].run(`CREATE TABLE IF NOT EXISTS ${table} (guid INTEGER PRIMARY KEY, track TEXT, car_model TEXT, laptime INTEGER);`)
         this.initialized = true;
     }
