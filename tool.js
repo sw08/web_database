@@ -2,25 +2,38 @@ const sql = require('sqlite3').verbose();
 
 class DB {
     constructor() {
-        this.initialized = false;
         this.tracks = undefined;
         this.acDB = undefined;
     }
-    init(file, table) {
+    open(file) {
         this[file] = new sql.Database(`db/${file}.db`);
-        this[file].run(`CREATE TABLE IF NOT EXISTS ${table} (guid INTEGER PRIMARY KEY, track TEXT, car_model TEXT, laptime INTEGER);`)
-        this.initialized = true;
+    }
+    init(file, table, columns) {
+        this[file].run(`CREATE TABLE IF NOT EXISTS ${table} (${columns});`)
     }
     track(tracks) {
         this.tracks = tracks;
     }
     get(file, table, conditions) {
-        var a = undefined;
-        var b = a;
-        this[file].get(`SELECT * FROM ${table} WHERE ${conditions.keys().join('=? AND ')}`, conditions.values(), function (err, row) {
-            b = row;
+        this[file].get(`SELECT * FROM ${table} WHERE ${Object.keys(conditions).join('=? AND ')}=?`, Object.values(conditions), (err, row) => {
+            this.row = row;
         });
-        return a;
+        return this.row;
+    }
+    getAll(file, table, conditions) {
+        this[file].all(`SELECT * FROM ${table} WHERE ${Object.keys(conditions).join('=? AND ')}=?`, Object.values(conditions), (err, row) => {
+            this.row = row;
+        });
+        return this.row;
+    }
+    insert(file, table, values) {
+        this[file].run(`INSERT INTO ${table}(${Object.keys(values).join(', ')}) VALUES(${("?, " * Object.keys(values).length).slice(0, -2)})`, Object.values(values));
+    }
+    update(file, table, conditions, values) {
+        this[file].run(`UPDATE ${table} SET ${Object.keys(values).join('=? AND ')}=? WHERE ${Object.keys(conditions).join('=? AND ')}=?`, Object.values(values) + Object.values(conditions))
+    }
+    delete(file, table, conditions) {
+        this[file].run(`DELETE FROM ${table} WHERE ${Object.keys(conditions).join('=? AND ')}=?`, Object.values(conditions));
     }
 }
 
