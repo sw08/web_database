@@ -21,9 +21,7 @@ app.use(bodyParser.json());
 
 app.use((req, res, next) => {
     console.log(req.headers)
-    const user = req.headers.authorization.user;
-    const password = req.headers.authorization.password;
-    if (setting.authorization.user !== user || setting.authorization.password !== password) {
+    if (setting.authorization.user + '||' + setting.authorization.password != req.headers.authorization) {
         res.sendStatus(403);
         return;
     }
