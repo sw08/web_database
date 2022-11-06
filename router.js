@@ -22,22 +22,21 @@ module.exports = [
         route: '/get_trackbest/:track/:car',
         router: (req, res) => {
             const result = db.get('acServer', 'trackbests', {track: req.params.track, car_model: req.params.car});
-            res.json(result);
+            res.json(result == undefined ? {} : result);
         }
     },
     {
         route: '/get_personalbest/:track/:car/:guid',
         router: (req, res) => {
             const result = db.get('acServer', 'personalbests', {track: req.params.track, car_model: req.params.car, guid: Number(req.params.guid)});
-            console.log(result);
-            res.json(result);
+            res.json(result == undefined ? {} : result);
         }
     },
     {
         route: '/get_rankings/:track/:car',
         router: (req, res) => {
             const result = db.getAll('acServer', 'personalbests', {track: req.params.track, car_model: req.params.car});
-            res.json(result);
+            res.json(result == undefined ? {} : result);
         }
     },
     {
