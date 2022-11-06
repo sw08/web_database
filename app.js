@@ -2,6 +2,7 @@ const express = require('express');
 const qs = require('qs');
 const routers = require('./router.js');
 const bodyParser = require('body-parser');
+const setting = require('./setting.js');
 
 const app = express();
 
