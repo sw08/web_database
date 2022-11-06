@@ -14,7 +14,7 @@ module.exports = [
         route: '/tracks',
         router: (req, res) => {
             db.track(req.body);
-            res.sendStatus(200);
+            res.json({'Status': '200 OK'});
         },
         type: 'POST'
     },
@@ -48,7 +48,7 @@ module.exports = [
             } else {
                 db.update('acServer', 'personalbests', {guid: Number(data.user_guid), track: data.track, car_model: data.model}, {laptime: data.laptime})
             }
-            res.sendStatus(200);
+            res.json({'Status': '200 OK'});
         },
         type: 'POST'
     },
@@ -61,7 +61,7 @@ module.exports = [
             } else {
                 db.update('acServer', 'trackbests', {track: data.track, car_model: data.model}, {laptime: data.laptime, guid: Number(data.user_guid)});
             }
-            res.sendStatus(200);
+            res.json({'Status': '200 OK'});
         },
         type: 'POST'
     },
@@ -75,7 +75,7 @@ module.exports = [
             } else if (username !== data.name) {
                 db.update('acServer', 'usernames', {guid: Number(data.guid)}, {name: data.name});
             }
-            res.sendStatus(200);
+            res.json({'Status': '200 OK'});
         },
         type: 'POST'
     },
