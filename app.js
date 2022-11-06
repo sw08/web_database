@@ -18,16 +18,16 @@ app.use((err, req, res, next) => {
 
 app.use(bodyParser.json());
 
-// app.use((req, res, next) => {
-//     console.log(req.headers)
-//     const user = req.headers.authorization.user;
-//     const password = req.headers.authorization.password;
-//     if (setting.authorization.user !== user || setting.authorization.password !== password) {
-//         res.sendStatus(403);
-//         return;
-//     }
-//     next();
-// });
+app.use((req, res, next) => {
+    console.log(req.headers)
+    const user = req.headers.authorization.user;
+    const password = req.headers.authorization.password;
+    if (setting.authorization.user !== user || setting.authorization.password !== password) {
+        res.sendStatus(403);
+        return;
+    }
+    next();
+});
 
 
 const router = express.Router();
