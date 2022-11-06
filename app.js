@@ -20,6 +20,7 @@ app.use((err, req, res, next) => {
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
+    console.log(req.url)
     console.log(req.headers)
     if (setting.authorization.user + '||' + setting.authorization.password != req.headers.authorization) {
         console.log(setting.authorization.user + '||' + setting.authorization.password);
