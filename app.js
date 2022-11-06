@@ -22,6 +22,8 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
     console.log(req.headers)
     if (setting.authorization.user + '||' + setting.authorization.password != req.headers.authorization) {
+        console.log(setting.authorization.user + '||' + setting.authorization.password);
+        console.log(req.headers.authorization)
         res.sendStatus(403);
         return;
     }
