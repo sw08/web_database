@@ -29,6 +29,7 @@ module.exports = [
         route: '/get_personalbest/:track/:car/:guid',
         router: (req, res) => {
             const result = db.get('acServer', 'personalbests', {track: req.params.track, car_model: req.params.car, guid: Number(req.params.guid)});
+            console.log(result);
             res.json(result);
         }
     },
