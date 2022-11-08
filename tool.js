@@ -38,5 +38,17 @@ class DB {
 }
 
 module.exports = {
-    DB: DB
+    DB: DB,
+    msToTime: function(time) {
+        const ms = time % 1000;
+        time -= ms
+        time /= 1000;
+        const s = time % 60;
+        time -= s;
+        time /= 60;
+        const m = time % 60;
+        time -= m;
+        time /= 60;
+        return `${time}:${m}:${s}.${ms}`;
+    }
 };

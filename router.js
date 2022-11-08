@@ -98,7 +98,7 @@ module.exports = [
             var name;
             for (var i = -2; i <= 2; i++) {
                 name = db.get('acServer', 'usernames', {guid: temp[i + 2].guid})
-                result += `${addZero(index - 2, zerocount)}. ${temp[i + 2].laptime} // ${name.name}\n`;
+                result += `${addZero(index - 2, zerocount)}. ${tool.msToTime(temp[i + 2].laptime)} // ${name.name}\n`;
             }
             res.send(result);
         }
