@@ -50,6 +50,6 @@ module.exports = {
     },
     addZero: function (number, count) {
         number = String(number);
-        return '0'.count(number.length - count) + number;
+        return '0'.repeat(number.length - count) + number;
     }
 };
