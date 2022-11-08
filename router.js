@@ -1,7 +1,5 @@
 const fs = require('fs');
 const tool = require('./tool.js');
-const setting = require('./setting.js');
-const { text } = require('body-parser');
 const db = new tool.DB();
 
 db.open('acServer');
@@ -98,7 +96,7 @@ module.exports = [
             var name;
             for (var i = -2; i <= 2; i++) {
                 name = db.get('acServer', 'usernames', {guid: temp[i + 2].guid})
-                result += `${addZero(index - 2, zerocount)}. ${tool.msToTime(temp[i + 2].laptime)} // ${name.name}\n`;
+                result += `${tool.addZero(index - 2, zerocount)}. ${tool.msToTime(temp[i + 2].laptime)} // ${name.name}\n`;
             }
             res.send(result);
         }

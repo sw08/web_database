@@ -46,9 +46,10 @@ module.exports = {
         const s = time % 60;
         time -= s;
         time /= 60;
-        const m = time % 60;
-        time -= m;
-        time /= 60;
-        return `${time}:${m}:${s}.${ms}`;
+        return `${time}:${s}.${this.addZero(ms, 3)}`;
+    },
+    addZero: function (number, count) {
+        number = String(number);
+        return '0'.count(number.length - count) + number;
     }
 };
