@@ -44,9 +44,9 @@ module.exports = [
         router: (req, res) => {
             const data = req.body;
             if (db.get('acServer', 'personalbests', {guid: Number(data.user_guid), track: data.track, car_model: data.model}) === undefined) {
-                db.insert('acServer', 'personalbests', {guid: Number(data.user_guid), track: data.track, car_model: data.model, laptime: data.laptime});
+                db.insert('acServer', 'personalbests', {guid: Number(data.user_guid), track: data.track, car_model: data.model, laptime: Number(data.laptime)});
             } else {
-                db.update('acServer', 'personalbests', {guid: Number(data.user_guid), track: data.track, car_model: data.model}, {laptime: data.laptime})
+                db.update('acServer', 'personalbests', {guid: Number(data.user_guid), track: data.track, car_model: data.model}, {laptime: Number(data.laptime)})
             }
             res.sendStatus(200);
         },
@@ -57,9 +57,9 @@ module.exports = [
         router: (req, res) => {
             const data = req.body;
             if (db.get('acServer', 'trackbests', {track: data.track, car_model: data.model}) === undefined) {
-                db.insert('acServer', 'trackbests', {track: data.track, car_model: data.model, guid: Number(data.user_guid), laptime: data.laptime});
+                db.insert('acServer', 'trackbests', {track: data.track, car_model: data.model, guid: Number(data.user_guid), laptime: Number(data.laptime)});
             } else {
-                db.update('acServer', 'trackbests', {track: data.track, car_model: data.model}, {laptime: data.laptime, guid: Number(data.user_guid)});
+                db.update('acServer', 'trackbests', {track: data.track, car_model: data.model}, {laptime: Number(data.laptime), guid: Number(data.user_guid)});
             }
             res.sendStatus(200);
         },
