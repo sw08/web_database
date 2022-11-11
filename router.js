@@ -68,6 +68,7 @@ module.exports = [
         router: (req, res) => {
             const data = req.body;
             const username = db.get('acServer', 'usernames', {guid: Number(data.guid)});
+            console.log(username);
             if (username === undefined) {
                 db.insert('acServer', 'usernames', {guid: Number(data.guid), name: data.name});
             } else if (username !== data.name) {
