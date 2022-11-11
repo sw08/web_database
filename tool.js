@@ -30,7 +30,7 @@ class DB {
         this[file].run(`INSERT INTO ${table}(${Object.keys(values).join(', ')}) VALUES(${"?, ".repeat(Object.keys(values).length).slice(0, -2)})`, Object.values(values));
     }
     update(file, table, conditions, values) {
-        this[file].run(`UPDATE ${table} SET ${Object.keys(values).join('=? AND ')}=? WHERE ${Object.keys(conditions).join('=? AND ')}=?`, Object.values(values) + Object.values(conditions))
+        this[file].run(`UPDATE ${table} SET ${Object.keys(values).join('=? AND ')}=? WHERE ${Object.keys(conditions).join('=? AND ')}=?`, Object.values(values).concat(Object.values(conditions)))
     }
     delete(file, table, conditions) {
         this[file].run(`DELETE FROM ${table} WHERE ${Object.keys(conditions).join('=? AND ')}=?`, Object.values(conditions));
