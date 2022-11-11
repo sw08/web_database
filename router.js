@@ -5,7 +5,7 @@ const db = new tool.DB();
 db.open('acServer');
 db.init('acServer', 'personalbests', 'guid INTEGER, track TEXT, car_model TEXT, laptime INTEGER');
 db.init('acServer', 'trackbests', 'guid INTEGER, track TEXT, car_model TEXT, laptime INTEGER');
-db.init('acServer', 'usernames', 'guid INTEGER PRIMARY KEY, name TEXT')
+db.init('acServer', 'usernames', 'guid INTEGER, name TEXT')
 
 module.exports = [
     {
@@ -68,10 +68,9 @@ module.exports = [
         router: (req, res) => {
             const data = req.body;
             const username = db.get('acServer', 'usernames', {guid: Number(data.guid)});
-            console.log(username);
-            if (username === undefined) {
+            if (username == undefined) {
                 db.insert('acServer', 'usernames', {guid: Number(data.guid), name: data.name});
-            } else if (username !== data.name) {
+            } else if (username.name !== data.name) {
                 db.update('acServer', 'usernames', {guid: Number(data.guid)}, {name: data.name});
             }
             res.sendStatus(200);
