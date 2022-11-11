@@ -17,6 +17,14 @@ module.exports = [
         type: 'POST'
     },
     {
+        route: '/cars',
+        router: (req, res) => {
+            db.car(req.body);
+            res.sendStatus(200);
+        }
+        type: 'POST'
+    },
+    {
         route: '/get_trackbest/:track/:car',
         router: (req, res) => {
             const result = db.get('acServer', 'trackbests', {track: req.params.track, car_model: req.params.car});
