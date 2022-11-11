@@ -21,7 +21,7 @@ module.exports = [
         router: (req, res) => {
             db.car(req.body);
             res.sendStatus(200);
-        }
+        },
         type: 'POST'
     },
     {
