@@ -5,7 +5,7 @@ const db = new tool.DB();
 db.open('acServer');
 db.init('acServer', 'personalbests', 'guid INTEGER, track TEXT, car_model TEXT, laptime INTEGER');
 db.init('acServer', 'trackbests', 'guid INTEGER, track TEXT, car_model TEXT, laptime INTEGER');
-db.init('acServer', 'usernames', 'guid INTEGER, name TEXT')
+db.init('acServer', 'usernames', 'guid INTEGER PRIMARY KEY, name TEXT')
 
 module.exports = [
     {
